@@ -1,57 +1,30 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"github.com/gonuts/commander"
 	"os"
 )
 
 const (
-	BANNER = `
-Command Line Interface to create tasks TODO
-Version: %s
-  `
-	VERSION = "v0.0.1"
+	todo_filename = "~/.todo.json"
 )
-
-var (
-	help   bool
-	create bool
-	list   bool
-	solve  bool
-)
-
-func init() {
-	flag.BoolVar(&help, "help", false, "Help menu")
-	flag.BoolVar(&create, "c", false, "Creates and saves a task")
-	flag.BoolVar(&list, "l", false, "Lists current tasks")
-	flag.BoolVar(&solve, "s", false, "Solves a task")
-
-	flag.Usage = func() {
-		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, VERSION))
-		flag.PrintDefaults()
-	}
-
-	flag.Parse()
-
-	if flag.NArg() == 0 {
-		flag.Usage()
-		os.Exit(1)
-	}
-
-	if help {
-		flag.Usage()
-		os.Exit(0)
-	}
-}
 
 func main() {
-	if create {
-
-	} else if list {
-
-	} else if solve {
-
+	command := &commander.Command{
+		UsageLine: os.Args[0],
+		Short:     "go_todo",
 	}
 
+	command.Subcommands = []*commander.Command{
+		todo_list(todo_filename),
+		todo_save(todo_filename),
+		todo_solve(todo_filename),
+	}
+
+	err := command.Dispatch(os.Args[1:])
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		os.Exit(1)
+	}
 }
