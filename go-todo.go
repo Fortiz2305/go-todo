@@ -17,9 +17,8 @@ func main() {
 	}
 
 	command.Subcommands = []*commander.Command{
-		todo_list(todo_filename),
+		//todo_list(todo_filename),
 		todo_save(todo_filename),
-		todo_solve(todo_filename),
 	}
 
 	err := command.Dispatch(os.Args[1:])
