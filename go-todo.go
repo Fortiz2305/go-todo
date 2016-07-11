@@ -4,11 +4,19 @@ import (
 	"fmt"
 	"github.com/gonuts/commander"
 	"os"
+	"time"
 )
 
 const (
 	todo_filename = "/Users/Fortiz/.todo.json"
 )
+
+type Task struct {
+  Id int
+  Todo string
+  Date time.Time
+  Status string
+}
 
 func main() {
 	command := &commander.Command{
@@ -17,7 +25,7 @@ func main() {
 	}
 
 	command.Subcommands = []*commander.Command{
-		//todo_list(todo_filename),
+		todo_list(todo_filename),
 		todo_save(todo_filename),
 	}
 

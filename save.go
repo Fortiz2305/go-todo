@@ -10,24 +10,17 @@ import (
   "math/rand"
 )
 
-type Task struct {
-  Id int64
-  Todo string
-  Date time.Time
-  Status string
-}
-
-func todo_save(filename string) *commander.Command {
+func todo_save(tasks_file string) *commander.Command {
   save := func(cmd *commander.Command, args []string) error {
     if len(args) == 0 {
       cmd.Usage()
       return nil
     }
 
-    task := Task{rand.Int(), os.Args[2], time.Now(), "OPEN"}
+    task := Task{rand.Int(), os.Args[2], time.Now().Local(), "OPEN"}
     task_json, _ := json.Marshal(task)
     task_json, _ = prettyprint(task_json)
-    file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+    file, err := os.OpenFile(tasks_file, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
     if err != nil {
       panic(err)
     }
@@ -43,7 +36,7 @@ func todo_save(filename string) *commander.Command {
 
   return &commander.Command {
     Run: save,
-    UsageLine: "save [message]",
+    UsageLine: "save [task]",
     Short: "save go_todo",
   }
 }
