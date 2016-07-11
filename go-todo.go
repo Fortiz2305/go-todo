@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	todo_filename = "~/.todo.json"
+	todo_filename = "/Users/Fortiz/.todo.json"
 )
 
 func main() {

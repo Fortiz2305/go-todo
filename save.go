@@ -5,12 +5,15 @@ import (
   "github.com/gonuts/commander"
   "encoding/json"
   "bytes"
+  "os"
+  "time"
+  "math/rand"
 )
 
 type Task struct {
   Id int64
   Todo string
-  Date string
+  Date time.Time
   Status string
 }
 
@@ -20,10 +23,19 @@ func todo_save(filename string) *commander.Command {
       cmd.Usage()
       return nil
     }
-    task := Task{1, "Programming in Go", "hoy", "OPEN"}
+    task := Task{rand.Int(), os.Args[2], time.Now(), "OPEN"}
     task_json, _ := json.Marshal(task)
     task_json, _ = prettyprint(task_json)
+    file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+    if err != nil {
+      panic(err)
+    }
+    defer file.Close()
+    _, err = fmt.Fprintf(file, "%s\n", task_json)
     fmt.Printf("%s", task_json)
+    if err != nil {
+      panic(err)
+    }
     return nil
   }
 
