@@ -23,6 +23,7 @@ func todo_save(filename string) *commander.Command {
       cmd.Usage()
       return nil
     }
+
     task := Task{rand.Int(), os.Args[2], time.Now(), "OPEN"}
     task_json, _ := json.Marshal(task)
     task_json, _ = prettyprint(task_json)
@@ -30,6 +31,7 @@ func todo_save(filename string) *commander.Command {
     if err != nil {
       panic(err)
     }
+
     defer file.Close()
     _, err = fmt.Fprintf(file, "%s\n", task_json)
     fmt.Printf("%s", task_json)
