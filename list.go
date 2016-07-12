@@ -12,7 +12,6 @@ import (
 )
 
 type Tasks struct {
-	Id int 											`json:"Id"`
 	Todo string									`json:"Todo"`
 	Date time.Time							`json:"Date"`
 	Status string								`json:"Status"`
@@ -27,7 +26,7 @@ func todo_list(tasks_file string) *commander.Command {
 
 		var jsontype Tasks
 		json.Unmarshal(file, &jsontype)
-		fmt.Printf("Results: %+v", jsontype.Id)
+		fmt.Printf("Results: %+v", jsontype)
 		//jsonParser := json.NewDecoder(file)
 		//if err = jsonParser.Decode(&tasks); err != nil {
 	//		panic(err)

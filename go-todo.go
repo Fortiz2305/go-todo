@@ -12,7 +12,6 @@ const (
 )
 
 type Task struct {
-  Id int
   Todo string
   Date time.Time
   Status string

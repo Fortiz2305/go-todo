@@ -7,7 +7,6 @@ import (
   "bytes"
   "os"
   "time"
-  "math/rand"
 )
 
 func todo_save(tasks_file string) *commander.Command {
@@ -17,7 +16,7 @@ func todo_save(tasks_file string) *commander.Command {
       return nil
     }
 
-    task := Task{rand.Int(), os.Args[2], time.Now().Local(), "OPEN"}
+    task := Task{os.Args[2], time.Now().Local(), "OPEN"}
     task_json, _ := json.Marshal(task)
     task_json, _ = prettyprint(task_json)
     file, err := os.OpenFile(tasks_file, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
