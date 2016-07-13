@@ -12,9 +12,13 @@ const (
 )
 
 type Task struct {
-  Todo string
-  Date time.Time
-  Status string
+	Todo string
+	Date time.Time
+	Status string
+}
+
+type Tasks struct {
+	Collection []Task
 }
 
 func main() {
