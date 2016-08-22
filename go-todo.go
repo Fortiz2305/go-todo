@@ -17,10 +17,6 @@ type Task struct {
 	Status string
 }
 
-type Tasks struct {
-	Collection []Task
-}
-
 func main() {
 	command := &commander.Command{
 		UsageLine: os.Args[0],
