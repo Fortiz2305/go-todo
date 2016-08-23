@@ -17,6 +17,10 @@ type Task struct {
 	Status string
 }
 
+type TaskCollection struct {
+	Pool []Task
+}
+
 func main() {
 	command := &commander.Command{
 		UsageLine: os.Args[0],

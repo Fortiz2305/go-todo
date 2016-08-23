@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/gonuts/commander"
 	"github.com/olekukonko/tablewriter"
 	"io/ioutil"
@@ -18,6 +18,7 @@ func todo_list(tasks_file string) *commander.Command {
 			panic(err)
 		}
 
+		fmt.Println(string(file))
 		tasksList := make([]Task, 0)
 		json.Unmarshal(file, &tasksList)
 
@@ -29,7 +30,7 @@ func todo_list(tasks_file string) *commander.Command {
 				[]string{tasksList[i].Todo, tasksList[i].Date.Format("2006-01-12"), tasksList[i].Status},
 			}
 			for _, v := range data {
-				table.Append(v)
+		    table.Append(v)
 			}
 		}
 
@@ -44,3 +45,9 @@ func todo_list(tasks_file string) *commander.Command {
 		Short:     "list go_todo",
 	}
 }
+
+//func (tc []Task) FromJson(jsonFile []byte) error {
+//	var data = &tc.Pool
+//	fmt.Println(string(jsonFile))
+//	return json.Unmarshal(jsonFile, data)
+//}
