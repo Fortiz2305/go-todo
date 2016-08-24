@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	todo_filename = "/Users/Fortiz/.todo.json"
+	todo_filename = ".todo.json"
 )
 
 type Task struct {
@@ -30,6 +30,8 @@ func main() {
 	command.Subcommands = []*commander.Command{
 		todo_list(todo_filename),
 		todo_save(todo_filename),
+		todo_status(todo_filename),
+		todo_delete(todo_filename),
 	}
 
 	err := command.Dispatch(os.Args[1:])

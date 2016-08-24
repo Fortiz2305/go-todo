@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gonuts/commander"
 	"github.com/olekukonko/tablewriter"
 	"io/ioutil"
+	"io"
 	"os"
-	//"strings"
+	"strings"
 	"encoding/json"
-	//"time"
 )
 
 func todo_list(tasks_file string) *commander.Command {
@@ -18,36 +17,35 @@ func todo_list(tasks_file string) *commander.Command {
 			panic(err)
 		}
 
-		fmt.Println(string(file))
-		tasksList := make([]Task, 0)
-		json.Unmarshal(file, &tasksList)
+		dec := json.NewDecoder(strings.NewReader(string(file)))
 
 		table := tablewriter.NewWriter(os.Stdout)
 		table.SetHeader([]string{"Task", "Date", "Status"})
 
-		for i := 0; i < len(tasksList); i++ {
-			data := [][]string{
-				[]string{tasksList[i].Todo, tasksList[i].Date.Format("2006-01-12"), tasksList[i].Status},
+		for {
+			var t Task
+			if err := dec.Decode(&t); err == io.EOF {
+				break
+			} else if err != nil {
+				panic(err)
 			}
-			for _, v := range data {
-		    table.Append(v)
-			}
+			data := []string{t.Todo, t.Date.Format("2006-01-12"), t.Status}
+			table.Append(data)
 		}
-
 		table.Render()
 
 		return nil
 	}
 
-	return &commander.Command{
+	return &commander.Command {
 		Run:       list,
-		UsageLine: "list [options]",
-		Short:     "list go_todo",
+		UsageLine: "list",
+		Short:     "Show the task list",
+		Long:`
+Show the task list.
+
+ex:
+  $ ./go-todo list
+`,
 	}
 }
-
-//func (tc []Task) FromJson(jsonFile []byte) error {
-//	var data = &tc.Pool
-//	fmt.Println(string(jsonFile))
-//	return json.Unmarshal(jsonFile, data)
-//}
