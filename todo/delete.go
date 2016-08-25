@@ -1,59 +1,59 @@
 package todo
 
 import (
-  "github.com/gonuts/commander"
-  "io/ioutil"
-  "os"
-  "strings"
-  "regexp"
+	"github.com/gonuts/commander"
+	"io/ioutil"
+	"os"
+	"regexp"
+	"strings"
 )
 
-func todo_delete(tasks_file string) *commander.Command {
-  delete := func(cmd *commander.Command, args []string) error {
-    file, err := ioutil.ReadFile(tasks_file)
-    if err != nil {
-      panic(err)
-    }
+func todoDelete(tasksFile string) *commander.Command {
+	delete := func(cmd *commander.Command, args []string) error {
+		file, err := ioutil.ReadFile(tasksFile)
+		if err != nil {
+			panic(err)
+		}
 
-    lines := strings.Split(string(file), "\n")
+		lines := strings.Split(string(file), "\n")
 
-    for i, line := range lines {
-      if strings.Contains(line, os.Args[2]) {
-        for k := -1; k <= 3; k++ {
-          lines[i+k] = ""
-        }
-      }
-    }
+		for i, line := range lines {
+			if strings.Contains(line, os.Args[2]) {
+				for k := -1; k <= 3; k++ {
+					lines[i+k] = ""
+				}
+			}
+		}
 
-    output, _ := removeEmptyLines(strings.Join(lines, "\n"))
+		output, _ := removeEmptyLines(strings.Join(lines, "\n"))
 
-    error_writing := ioutil.WriteFile(tasks_file, []byte(output), 0644)
-    if error_writing != nil {
-      panic(error_writing)
-    }
+		errorWriting := ioutil.WriteFile(tasksFile, []byte(output), 0644)
+		if errorWriting != nil {
+			panic(errorWriting)
+		}
 
-    return nil
-  }
+		return nil
+	}
 
-  return &commander.Command {
-    Run: delete,
-    UsageLine: "delete Task",
-    Short: "Delete a task",
-    Long:`
+	return &commander.Command{
+		Run:       delete,
+		UsageLine: "delete Task",
+		Short:     "Delete a task",
+		Long: `
 Delete a task.
 
 ex:
   $ ./go-todo delete "MyTask"
 `,
-  }
+	}
 }
 
 func removeEmptyLines(lines string) (string, error) {
-  regex, err := regexp.Compile("\n\n")
-  if err != nil {
-    panic(err)
-  }
-  lines = regex.ReplaceAllString(lines, "\n")
+	regex, err := regexp.Compile("\n\n")
+	if err != nil {
+		panic(err)
+	}
+	lines = regex.ReplaceAllString(lines, "\n")
 
-  return lines, err
+	return lines, err
 }

@@ -1,18 +1,18 @@
 package todo
 
 import (
+	"encoding/json"
 	"github.com/gonuts/commander"
 	"github.com/olekukonko/tablewriter"
-	"io/ioutil"
 	"io"
+	"io/ioutil"
 	"os"
 	"strings"
-	"encoding/json"
 )
 
-func todo_list(tasks_file string) *commander.Command {
+func todoList(tasksFile string) *commander.Command {
 	list := func(cmd *commander.Command, args []string) error {
-		file, err := ioutil.ReadFile(tasks_file)
+		file, err := ioutil.ReadFile(tasksFile)
 		if err != nil {
 			panic(err)
 		}
@@ -37,11 +37,11 @@ func todo_list(tasks_file string) *commander.Command {
 		return nil
 	}
 
-	return &commander.Command {
+	return &commander.Command{
 		Run:       list,
 		UsageLine: "list",
 		Short:     "Show the task list",
-		Long:`
+		Long: `
 Show the task list.
 
 ex:
