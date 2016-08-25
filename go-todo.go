@@ -1,8 +1,6 @@
 package main
 
-import (
-  "go-todo/todo"
-)
+import "go-todo/todo"
 
 func main() {
   err := todo.Run()
