@@ -1,4 +1,4 @@
-package main
+package todo
 
 import (
   "github.com/gonuts/commander"

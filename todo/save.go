@@ -1,4 +1,4 @@
-package main
+package todo
 
 import (
   "fmt"
@@ -7,7 +7,6 @@ import (
   "bytes"
   "os"
   "time"
-  //"strconv"
 )
 
 func todo_save(tasks_file string) *commander.Command {

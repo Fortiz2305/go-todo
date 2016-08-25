@@ -1,42 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"github.com/gonuts/commander"
-	"os"
-	"time"
+  "go-todo/todo"
 )
-
-const (
-	todo_filename = ".todo.json"
-)
-
-type Task struct {
-	Todo string
-	Date time.Time
-	Status string
-}
-
-type TaskCollection struct {
-	Pool []Task
-}
-
 func main() {
-	command := &commander.Command{
-		UsageLine: os.Args[0],
-		Short:     "go_todo",
-	}
-
-	command.Subcommands = []*commander.Command{
-		todo_list(todo_filename),
-		todo_save(todo_filename),
-		todo_status(todo_filename),
-		todo_delete(todo_filename),
-	}
-
-	err := command.Dispatch(os.Args[1:])
-	if err != nil {
-		fmt.Printf("%v\n", err)
-		os.Exit(1)
-	}
+  err := todo.Run()
+  if err !=  nil {
+    panic(err)
+  }
 }
