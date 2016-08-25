@@ -11,12 +11,21 @@ const (
 	todoFilename = ".todo.json"
 )
 
+/*
+Task structure
+  Todo: Task name
+	Date: Task Date
+	Status: Task Status
+*/
 type Task struct {
 	Todo   string
 	Date   time.Time
 	Status string
 }
 
+/* Run function
+- It launches the go-todo CLI and return an error variable
+*/
 func Run() error {
 	command := &commander.Command{
 		UsageLine: os.Args[0],

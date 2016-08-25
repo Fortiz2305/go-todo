@@ -18,15 +18,15 @@ func todoSave(tasksFile string) *commander.Command {
 
 		newTask := Task{os.Args[2], time.Now().Local(), "OPEN"}
 
-		task_JSON, _ := json.Marshal(newTask)
-		task_JSON, _ = prettyprint(task_JSON)
+		taskJSON, _ := json.Marshal(newTask)
+		taskJSON, _ = prettyprint(taskJSON)
 		file, err := os.OpenFile(tasksFile, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 		if err != nil {
 			panic(err)
 		}
 		defer file.Close()
 
-		_, err = fmt.Fprintf(file, "%s\n", task_JSON)
+		_, err = fmt.Fprintf(file, "%s\n", taskJSON)
 		if err != nil {
 			panic(err)
 		}
