@@ -23,8 +23,10 @@ type Task struct {
 	Status string
 }
 
-/* Run function
-- It launches the go-todo CLI and return an error variable
+/*
+Run function
+
+It launches the go-todo CLI and return an error variable
 */
 func Run() error {
 	command := &commander.Command{
