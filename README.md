@@ -1,4 +1,4 @@
-# go-todo
+# go-todo [![Go ReportCard](https://goreportcard.com/badge/github.com/Fortiz2305/go-todo)](https://goreportcard.com/report/github.com/Fortiz2305/go-todo)
 
 A simple command line todo list written in Go.
 
@@ -74,12 +74,4 @@ bash-3.2$ ./go-todo list
 ## Requirements
 
 * Golang: http://golang.org/doc/install.html
-
-
-
-
-
-
-
-
 
