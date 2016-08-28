@@ -46,8 +46,8 @@ bash-3.2$ ./go-todo list
 +----+------------------------+-------------+--------+
 | ID |          TASK          |    DATE     | STATUS |
 +----+------------------------+-------------+--------+
-|  1 | Make an awesome Go CLI | 2016-08-828 | OPEN   |
-|  2 | Fix a bug              | 2016-08-828 | OPEN   |
+|  1 | Make an awesome Go CLI | 2016-08-28  | OPEN   |
+|  2 | Fix a bug              | 2016-08-28  | OPEN   |
 +----+------------------------+-------------+--------+
 ```
 
@@ -60,20 +60,20 @@ bash-3.2$ ./go-todo list
 +----+------------------------+-------------+--------+
 | ID |          TASK          |    DATE     | STATUS |
 +----+------------------------+-------------+--------+
-|  1 | Make an awesome Go CLI | 2016-08-828 | OPEN   |
+|  1 | Make an awesome Go CLI | 2016-08-28  | OPEN   |
 +----+------------------------+-------------+--------+
 ```
 
 ### Change status
 
 ```
-bash-3.2$ ./go-todo set_status 1 "Pending to review"
+bash-3.2$ ./go-todo setStatus 1 "Pending to review"
 
 bash-3.2$ ./go-todo list
 +----+------------------------+-------------+-------------------+
 | ID |          TASK          |    DATE     |      STATUS       |
 +----+------------------------+-------------+-------------------+
-|  1 | Make an awesome Go CLI | 2016-08-828 | Pending to review |
+|  1 | Make an awesome Go CLI | 2016-08-28  | Pending to review |
 +----+------------------------+-------------+-------------------+
 ```
 
