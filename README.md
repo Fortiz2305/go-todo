@@ -19,7 +19,7 @@ Commands:
     delete      Delete a task
     list        Show the task list
     save        Save a new task
-    set_status  Set the status of your task
+    setStatus  Set the status of your task
 
     Use "./go-todo help <command>" for more information about a command.
 ```
@@ -62,7 +62,7 @@ bash-3.2$ ./go-todo list
 +----+------------------------+-------------+--------+
 |  1 | Make an awesome Go CLI | 2016-08-828 | OPEN   |
 +----+------------------------+-------------+--------+
-``
+```
 
 ### Change status
 
