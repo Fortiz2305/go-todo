@@ -4,9 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/gonuts/commander"
+	"io/ioutil"
 	"os"
+	"strconv"
+	"strings"
 	"time"
+
+	"github.com/gonuts/commander"
 )
 
 func todoSave(tasksFile string) *commander.Command {
@@ -16,15 +20,16 @@ func todoSave(tasksFile string) *commander.Command {
 			return nil
 		}
 
-		newTask := Task{os.Args[2], time.Now().Local(), "OPEN"}
-
-		taskJSON, _ := json.Marshal(newTask)
-		taskJSON, _ = prettyprint(taskJSON)
 		file, err := os.OpenFile(tasksFile, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 		if err != nil {
 			panic(err)
 		}
 		defer file.Close()
+
+		newTask := Task{strconv.Itoa(findID(tasksFile)), os.Args[2], time.Now().Local(), "OPEN"}
+
+		taskJSON, _ := json.Marshal(newTask)
+		taskJSON, _ = prettyprint(taskJSON)
 
 		_, err = fmt.Fprintf(file, "%s\n", taskJSON)
 		if err != nil {
@@ -50,4 +55,24 @@ func prettyprint(b []byte) ([]byte, error) {
 	var output bytes.Buffer
 	err := json.Indent(&output, b, "", "  ")
 	return output.Bytes(), err
+}
+
+func findID(filename string) int {
+	file, err := ioutil.ReadFile(filename)
+	if err != nil {
+		panic(err)
+	}
+
+	lines := strings.Split(string(file), "\n")
+	n := 1
+	for _, line := range lines {
+		if strings.Contains(line, "ID") {
+			if strings.Contains(line, strconv.Itoa(n)) {
+				n++
+			} else {
+				break
+			}
+		}
+	}
+	return n
 }

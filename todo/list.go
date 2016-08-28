@@ -2,12 +2,13 @@ package todo
 
 import (
 	"encoding/json"
-	"github.com/gonuts/commander"
-	"github.com/olekukonko/tablewriter"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/gonuts/commander"
+	"github.com/olekukonko/tablewriter"
 )
 
 func todoList(tasksFile string) *commander.Command {
@@ -20,7 +21,7 @@ func todoList(tasksFile string) *commander.Command {
 		dec := json.NewDecoder(strings.NewReader(string(file)))
 
 		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"Task", "Date", "Status"})
+		table.SetHeader([]string{"ID", "Task", "Date", "Status"})
 
 		for {
 			var t Task
@@ -29,7 +30,7 @@ func todoList(tasksFile string) *commander.Command {
 			} else if err != nil {
 				panic(err)
 			}
-			data := []string{t.Todo, t.Date.Format("2006-01-12"), t.Status}
+			data := []string{t.ID, t.Todo, t.Date.Format("2006-01-12"), t.Status}
 			table.Append(data)
 		}
 		table.Render()

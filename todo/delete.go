@@ -1,11 +1,12 @@
 package todo
 
 import (
-	"github.com/gonuts/commander"
 	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/gonuts/commander"
 )
 
 func todoDelete(tasksFile string) *commander.Command {
@@ -18,8 +19,8 @@ func todoDelete(tasksFile string) *commander.Command {
 		lines := strings.Split(string(file), "\n")
 
 		for i, line := range lines {
-			if strings.Contains(line, os.Args[2]) {
-				for k := -1; k <= 3; k++ {
+			if strings.Contains(line, "ID\": "+"\""+os.Args[2]) {
+				for k := -1; k <= 4; k++ {
 					lines[i+k] = ""
 				}
 			}

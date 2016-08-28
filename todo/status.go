@@ -1,10 +1,11 @@
 package todo
 
 import (
-	"github.com/gonuts/commander"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/gonuts/commander"
 )
 
 func todoStatus(tasksFile string) *commander.Command {
@@ -17,8 +18,8 @@ func todoStatus(tasksFile string) *commander.Command {
 		lines := strings.Split(string(file), "\n")
 
 		for i, line := range lines {
-			if strings.Contains(line, os.Args[2]) {
-				lines[i+2] = "  \"Status\":" + " \"" + os.Args[3] + "\""
+			if strings.Contains(line, "ID\": "+"\""+os.Args[2]) {
+				lines[i+3] = "  \"Status\":" + " \"" + os.Args[3] + "\""
 			}
 		}
 

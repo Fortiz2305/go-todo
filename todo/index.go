@@ -2,9 +2,10 @@ package todo
 
 import (
 	"fmt"
-	"github.com/gonuts/commander"
 	"os"
 	"time"
+
+	"github.com/gonuts/commander"
 )
 
 const (
@@ -18,6 +19,7 @@ Task structure
 	Status: Task Status
 */
 type Task struct {
+	ID     string
 	Todo   string
 	Date   time.Time
 	Status string
