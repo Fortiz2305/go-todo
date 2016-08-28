@@ -1,4 +1,4 @@
-# go-todo [![Go ReportCard](https://goreportcard.com/badge/github.com/Fortiz2305/go-todo)](https://goreportcard.com/report/github.com/Fortiz2305/go-todo)
+# go-todo [![Go ReportCard](https://goreportcard.com/badge/github.com/Fortiz2305/go-todo)](https://goreportcard.com/report/github.com/Fortiz2305/go-todo)[![GoDoc](https://godoc.org/github.com/Fortiz2305/go-todo/todo?status.svg)](https://godoc.org/github.com/Fortiz2305/go-todo/todo)
 
 A simple command line todo list written in Go.
 
