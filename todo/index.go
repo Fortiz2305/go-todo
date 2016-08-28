@@ -14,9 +14,10 @@ const (
 
 /*
 Task structure
+  ID: Task unique identificator
   Todo: Task name
-	Date: Task Date
-	Status: Task Status
+  Date: Task Date
+  Status: Task Status
 */
 type Task struct {
 	ID     string
